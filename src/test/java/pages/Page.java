@@ -1,6 +1,7 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -15,14 +16,25 @@ import static org.awaitility.Awaitility.await;
 
 public abstract class Page {
 
-    static WebDriver driver;
+    static AppiumDriver driver;
     static WebDriverWait wait;
+
     Page(WebDriver driver)
     {
-        Page.driver = driver;
+        Page.driver = (AppiumDriver) driver;
         Page.wait = new WebDriverWait(driver, 30);
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
+
+
+
+//    public Page(AppiumDriver driver) {
+//        this.driver = driver;
+//        this.wait = new WebDriverWait(driver, 20);
+//        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+//        g = new General(driver);
+//    }
 
     public abstract boolean isAt();
     public boolean isAt(long timeout){
@@ -40,9 +52,8 @@ public abstract class Page {
         wait.until(ExpectedConditions.elementToBeClickable(clickLocator));
 
         String myTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
-        System.out.print(myTime + " Clicking locator: " + clickLocator + " on page with title: " + driver.getTitle() );
+        System.out.print(myTime + " Clicking locator: " + clickLocator);
 
-        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,0);");
 
         for(int i=0; i<10000; i++) {
             try {

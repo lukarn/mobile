@@ -21,29 +21,27 @@ public class DriverManager {
         this.driver = driver;
     }
 
-    public WebDriver getDriver(String usingBrowser)
+    public WebDriver getDriver(String usingDevice)
     {
-        if(usingBrowser.equalsIgnoreCase("chrome"))
+        if(usingDevice.equalsIgnoreCase("android7emulator"))
         {
-            //run chromedriver
-            driver = getChromeDriver();
-            System.out.println("start with chromedriver :)");
+            driver = getEmulatorDevice();
+            System.out.println("testing emulator device - android 7.0 :)");
         }
-        else if(usingBrowser.equalsIgnoreCase("firefox"))
+        else if(usingDevice.equalsIgnoreCase("android9LGQ7realDevice"))
         {
-            //run firefox
-            driver = getFirefoxDriver();
-            System.out.println("start with firefoxdriver :)");
+            driver = getRealDeviceLG();
+            System.out.println("testing real device - android 9.0 LGQ7 :)");
         }
         else {
-            //other drivers to implement!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            System.out.println("---------other driver to implement");
+            //other devices to implement!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            System.out.println("---------No config of device - need to implement in DriverManager ");
         }
 
         return driver;
     }
 
-    private WebDriver getChromeDriver()
+    private WebDriver getEmulatorDevice()
     {
 //        HashMap<String, Object> chromePrefs = new HashMap<>();
 //        chromePrefs.put("profile.default_content_settings.popups", 0);
@@ -56,21 +54,45 @@ public class DriverManager {
 //        options.addArguments("--window-size=1920,1080");
 
         DesiredCapabilities cap = new DesiredCapabilities();
-        //cap.setCapability("udid", "LMQ610NR9D7LLJ7TTO"); //DeviceId from "adb devices" command
+
         cap.setCapability("deviceName", "emulator-5556");
-//        cap.setCapability("udid", "emulator-5556"); //DeviceId from "adb devices" command
+        cap.setCapability("udid", "emulator-5556"); //DeviceId from "adb devices" command
         cap.setCapability("platformName", "Android");
         cap.setCapability("platformVersion", "7.0");
         cap.setCapability("skipUnlock","true");
-        //cap.setCapability("appPackage", "pl.kamsoft.wizyta");
-        cap.setCapability("appPackage", "com.eworld.mobile");
-        //cap.setCapability("appActivity","pl.kamsoft.wizytalibrary.Activities.SplashScreenActivity");
-        //MainActivity
-        cap.setCapability("appActivity","com.eworld.mobile.activities.MainActivity");
-        cap.setCapability("noReset","false");
-        //cap.setCapability("automationName", "UiAutomator2");
+        cap.setCapability("appPackage", "tiny.exchangerate");
+        cap.setCapability("appActivity","tiny.exchangerate.ui.calculator.CalculatorActivity");
+        cap.setCapability("noReset","true");
+        cap.setCapability("automationName", "UiAutomator");
         cap.setCapability("autoGrantPermissions", "true");
-        //cap.setCapability("language", "pl");
+
+        WebDriver driver = null;
+
+        try {
+            driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+            //driver = new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), options);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("---------Driver = null - problem during EmulatorDevice init in DriverManager");
+        }
+
+        return driver;
+    }
+
+    private WebDriver getRealDeviceLG()
+    {
+        DesiredCapabilities cap = new DesiredCapabilities();
+
+        cap.setCapability("udid", "LMQ610NR9D7LLJ7TTO"); //DeviceId from "adb devices" command
+        cap.setCapability("deviceName", "LMQ610NR9D7LLJ7TTO");
+        cap.setCapability("platformName", "Android");
+        cap.setCapability("platformVersion", "9.0");
+        cap.setCapability("skipUnlock","true");
+        cap.setCapability("appPackage", "tiny.exchangerate");
+        cap.setCapability("appActivity","tiny.exchangerate.ui.calculator.CalculatorActivity");
+        cap.setCapability("noReset","true");
+        cap.setCapability("automationName", "UiAutomator");
+        cap.setCapability("autoGrantPermissions", "true");
 
 
         WebDriver driver = null;
@@ -80,34 +102,7 @@ public class DriverManager {
             //driver = new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), options);
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("---------Driver = null - problem during chrome init in DriverManager");
-        }
-
-        return driver;
-    }
-
-    private WebDriver getFirefoxDriver()
-    {
-        FirefoxOptions options = new FirefoxOptions();
-        FirefoxProfile myProfile = new FirefoxProfile();
-        myProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
-        myProfile.setPreference("pdfjs.disabled", true);
-        myProfile.setPreference("browser.download.folderList", 2);
-        myProfile.setPreference("browser.download.manager.showWhenStarting", false);
-        myProfile.setPreference("browser.download.dir", System.getProperty("user.dir") + "\\screenShots");
-        options.setProfile(myProfile);
-        options.setHeadless(true);
-        options.addArguments("--width=1920");
-        options.addArguments("--height=1080");
-
-
-        WebDriver driver = null;
-
-        try {
-            driver = new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), options);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail("---------Driver = null - problem during firefox init in DriverManager");
+            Assert.fail("---------Driver = null - problem during RealDeviceLG init in DriverManager");
         }
 
         return driver;
