@@ -27,15 +27,6 @@ public abstract class Page {
     }
 
 
-
-
-//    public Page(AppiumDriver driver) {
-//        this.driver = driver;
-//        this.wait = new WebDriverWait(driver, 20);
-//        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-//        g = new General(driver);
-//    }
-
     public abstract boolean isAt();
     public boolean isAt(long timeout){
         try{

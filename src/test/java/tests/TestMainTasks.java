@@ -7,9 +7,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.BasePage;
-import pages.MainPage;
-import pages.TrainPage;
-import pages.WorkPage;
 import utilities.DriverManager;
 
 
@@ -87,34 +84,81 @@ public class TestMainTasks
         // Page Object - assign
         basePage = new BasePage(driver);
 
-        //Assert.assertTrue(basePage.isAt(envTimeoutIsAt), "----------BasePage not loaded!");
-
-        basePage.setLoginButton();
+        Assert.assertTrue(basePage.isAt(envTimeoutIsAt), "----------BasePage not loaded!");
 
     }
 
     @Test(dataProvider="getData")
-    public void loginCorrect(int p1, String p2, String p3) {
+    public void comb1(int p1, String p2, String p3) {
         launch(p1, p2, p3);
 
+        basePage.setSelectedCurrency(envHomeCountryOrCurrency)
+                .setFirstExchange(envFirstExchange)
+                .setSecondExchange(envSecondExchange)
+                .setThirdExchange(envThirdExchange);
 
         try {
-            Thread.sleep(250000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-//        basePage.setLoginInput(envLoginLogin);
-//                .setPasswordInput(envLoginPassword)
-//                .setZalogujButton();
 
-//        try {
-//            Thread.sleep(200000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+    }
 
-        //Assert.assertTrue(mainPage.isAt(envTimeoutIsAt), "----------Log in fail - you are not on MainPage");
+
+    @Test(dataProvider="getData")
+    public void comb2(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envFirstExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envSecondExchange)
+                .setThirdExchange(envThirdExchange);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Test(dataProvider="getData")
+    public void comb3(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envSecondExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envFirstExchange)
+                .setThirdExchange(envThirdExchange);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Test(dataProvider="getData")
+    public void comb4(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envThirdExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envSecondExchange)
+                .setThirdExchange(envFirstExchange);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

@@ -1,46 +1,24 @@
 package pages;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AndroidBy;
-import io.appium.java_client.pagefactory.AndroidFindAll;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AndroidFindBys;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 public class BasePage extends Page {
 
     @Override
     public boolean isAt(){
-        return this.loginButton.isDisplayed();
+        return this.selectedCurrency.isDisplayed();
     }
 
-    //@AndroidFindBy(id = "pl.kamsoft.wizyta:id/demo_button")
-    //@AndroidFindBy(xpath = "//*[@resource-id='login_section_btn']")
-    @AndroidFindBy(id = "login_section_btn")
-    private WebElement loginButton;
 
-
-    @AndroidFindBy(id = "#bestForm>button[type='submit']")
-    private WebElement zalogujButton;
-
-    @AndroidFindBy(id = "registeredPlayerLogin")
-    private WebElement loginInput;
-
-    @AndroidFindBy(id = "registeredPlayerPassword")
-    private WebElement passwordInput;
-
-    /////////////////////////////////////////
     @AndroidFindBy(id = "tiny.exchangerate:id/md_buttonDefaultNegative")
     private WebElement cancelButton;
+
+    //
 
 //    @AndroidFindBys({
 //        @AndroidBy(id = "tiny.exchangerate:id/selectedRowView"),
@@ -48,7 +26,7 @@ public class BasePage extends Page {
 //    })
 //    private List<WebElement> firstCurrency;
     @AndroidFindBy(id = "tiny.exchangerate:id/selectedFlagContainer")
-    private WebElement firstCurrency;
+    private WebElement selectedCurrency;
 
     @AndroidFindBy(id = "tiny.exchangerate:id/action_search")
     private WebElement searchButton;
@@ -74,77 +52,44 @@ public class BasePage extends Page {
         super(driver);
     }
 
+    //clickElement(this.cancelButton);
 
-    public void setLoginButton()
-    {
-        //clickElement(this.cancelButton);
-        //clickElement(this.firstCurrency.get(0));
-        clickElement(this.firstCurrency);
-
+    public BasePage setSelectedCurrency(String countryOrCurrency){
+        clickElement(this.selectedCurrency);
         clickElement(this.searchButton);
-
         clickElement(this.searchCountry);
-
-        this.searchCountry.sendKeys("Poland");
-
+        this.searchCountry.sendKeys(countryOrCurrency);
         clickElement(this.fistFlagTextView);
+        return this;
+    }
 
-        //////////////////////
+    public BasePage setFirstExchange(String countryOrCurrency){
         clickElement(this.secondCurrency.get(0));
-
         clickElement(this.searchButton);
-
         clickElement(this.searchCountry);
-
-        this.searchCountry.sendKeys("USA");
-
+        this.searchCountry.sendKeys(countryOrCurrency);
         clickElement(this.fistFlagTextView);
+        return this;
+    }
 
-        //////////////////////
+    public BasePage setSecondExchange(String countryOrCurrency){
         clickElement(this.secondCurrency.get(1));
-
         clickElement(this.searchButton);
-
         clickElement(this.searchCountry);
-
-        this.searchCountry.sendKeys("EUR");
-
+        this.searchCountry.sendKeys(countryOrCurrency);
         clickElement(this.fistFlagTextView);
+        return this;
+    }
 
-        //////////////////////
+    public BasePage setThirdExchange(String countryOrCurrency){
         clickElement(this.secondCurrency.get(2));
-
         clickElement(this.searchButton);
-
         clickElement(this.searchCountry);
-
-        this.searchCountry.sendKeys("Switzerland");
-
+        this.searchCountry.sendKeys(countryOrCurrency);
         clickElement(this.fistFlagTextView);
-
-
-
-
-
-    }
-
-
-
-    public BasePage setLoginInput(String text)
-    {
-        clickElement(this.loginInput);
-        this.loginInput.clear();
-        this.loginInput.sendKeys(text);
         return this;
     }
 
-    public BasePage setPasswordInput(String text)
-    {
-        clickElement(this.passwordInput);
-        this.passwordInput.clear();
-        this.passwordInput.sendKeys(text);
-        return this;
-    }
 
 
 }
