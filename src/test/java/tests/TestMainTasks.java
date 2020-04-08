@@ -103,64 +103,69 @@ public class TestMainTasks
             e.printStackTrace();
         }
 
-
-    }
-
-
-    @Test(dataProvider="getData")
-    public void comb2(int p1, String p2, String p3) {
-        launch(p1, p2, p3);
-
-        basePage.setSelectedCurrency(envFirstExchange)
-                .setFirstExchange(envHomeCountryOrCurrency)
-                .setSecondExchange(envSecondExchange)
-                .setThirdExchange(envThirdExchange);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        basePage.getSelectedAmount();
+        basePage.getRowList1Amount();
+        basePage.getRowList2Amount();
+        basePage.getRowList3Amount();
 
 
     }
 
 
-    @Test(dataProvider="getData")
-    public void comb3(int p1, String p2, String p3) {
-        launch(p1, p2, p3);
-
-        basePage.setSelectedCurrency(envSecondExchange)
-                .setFirstExchange(envHomeCountryOrCurrency)
-                .setSecondExchange(envFirstExchange)
-                .setThirdExchange(envThirdExchange);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    @Test(dataProvider="getData")
-    public void comb4(int p1, String p2, String p3) {
-        launch(p1, p2, p3);
-
-        basePage.setSelectedCurrency(envThirdExchange)
-                .setFirstExchange(envHomeCountryOrCurrency)
-                .setSecondExchange(envSecondExchange)
-                .setThirdExchange(envFirstExchange);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-    }
+//    @Test(dataProvider="getData")
+//    public void comb2(int p1, String p2, String p3) {
+//        launch(p1, p2, p3);
+//
+//        basePage.setSelectedCurrency(envFirstExchange)
+//                .setFirstExchange(envHomeCountryOrCurrency)
+//                .setSecondExchange(envSecondExchange)
+//                .setThirdExchange(envThirdExchange);
+//
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+//
+//
+//    @Test(dataProvider="getData")
+//    public void comb3(int p1, String p2, String p3) {
+//        launch(p1, p2, p3);
+//
+//        basePage.setSelectedCurrency(envSecondExchange)
+//                .setFirstExchange(envHomeCountryOrCurrency)
+//                .setSecondExchange(envFirstExchange)
+//                .setThirdExchange(envThirdExchange);
+//
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+//
+//    @Test(dataProvider="getData")
+//    public void comb4(int p1, String p2, String p3) {
+//        launch(p1, p2, p3);
+//
+//        basePage.setSelectedCurrency(envThirdExchange)
+//                .setFirstExchange(envHomeCountryOrCurrency)
+//                .setSecondExchange(envSecondExchange)
+//                .setThirdExchange(envFirstExchange);
+//
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
 
 

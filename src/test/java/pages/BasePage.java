@@ -1,7 +1,10 @@
 package pages;
 
+import io.appium.java_client.pagefactory.AndroidBy;
+import io.appium.java_client.pagefactory.AndroidFindAll;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
+import io.appium.java_client.pagefactory.AndroidFindBys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -80,6 +83,58 @@ public class BasePage extends Page {
         clickElement(this.fistFlagTextView);
         return this;
     }
+
+
+    @AndroidFindBy(id = "tiny.exchangerate:id/result")
+    private List<WebElement> rowList3Amount;
+
+    public void getSelectedAmount(){
+
+        System.out.println("Selected result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(0).getText() + "<<<<<<<<<<<<<<<<<<<<");
+
+
+    }
+
+    public void getRowList1Amount(){
+
+        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(1).getText() + "<<<<<<<<<<<<<<<<<<<<");
+
+
+    }
+
+    public void getRowList2Amount(){
+
+        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(2).getText() + "<<<<<<<<<<<<<<<<<<<<");
+
+
+    }
+
+
+
+
+    public void getRowList3Amount(){
+
+        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(3).getText() + "<<<<<<<<<<<<<<<<<<<<");
+        String number = "123,321";
+        System.out.println("RowList3Amount result: >>>>>>>double>>>>>>>>>>>>>>>>>>>" + Double.parseDouble( this.rowList3Amount.get(3).getText().replace(",",".") ) + "<<<<<<<<<<<<<<<<<<<<");
+
+    }
+
+
+//    <android.widget.FrameLayout resource-id="tiny.exchangerate:id/selectedRowView">
+//<android.widget.LinearLayout resource-id="tiny.exchangerate:id/container">
+//<android.view.ViewGroup>
+//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
+
+    ///////////////////////////////
+
+//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
+//
+//    <androidx.recyclerview.widget.RecyclerView resource-id="tiny.exchangerate:id/rowList">
+//<android.view.ViewGroup>
+//<android.widget.LinearLayout resource-id="tiny.exchangerate:id/flagContainer">
+//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
+
 
     public BasePage setThirdExchange(String countryOrCurrency){
         clickElement(this.secondCurrency.get(2));
