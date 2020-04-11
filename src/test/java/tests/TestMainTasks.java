@@ -97,75 +97,68 @@ public class TestMainTasks
                 .setSecondExchange(envSecondExchange)
                 .setThirdExchange(envThirdExchange);
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Assert.assertEquals(basePage.getSelectedAmount(envHomeCountryOrCurrency), 100.0, "Your currency is not 100 - check amount");
+        Assert.assertTrue(basePage.getRowList1Amount(envFirstExchange) > 20, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList2Amount(envSecondExchange) > 20, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList3Amount(envThirdExchange) > 20, "Exchange rate definitely too high - something is going wrong in your country!");
 
-        basePage.getSelectedAmount();
-        basePage.getRowList1Amount();
-        basePage.getRowList2Amount();
-        basePage.getRowList3Amount();
+    }
+
+
+    @Test(dataProvider="getData")
+    public void comb2(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envFirstExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envSecondExchange)
+                .setThirdExchange(envThirdExchange);
+
+        Assert.assertEquals(basePage.getSelectedAmount(envFirstExchange), 100.0, "Your currency is not 100 - check amount");
+        Assert.assertTrue(basePage.getRowList1Amount(envHomeCountryOrCurrency) > 400, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList2Amount(envSecondExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList3Amount(envThirdExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
+
 
 
     }
 
 
-//    @Test(dataProvider="getData")
-//    public void comb2(int p1, String p2, String p3) {
-//        launch(p1, p2, p3);
-//
-//        basePage.setSelectedCurrency(envFirstExchange)
-//                .setFirstExchange(envHomeCountryOrCurrency)
-//                .setSecondExchange(envSecondExchange)
-//                .setThirdExchange(envThirdExchange);
-//
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//
-//    @Test(dataProvider="getData")
-//    public void comb3(int p1, String p2, String p3) {
-//        launch(p1, p2, p3);
-//
-//        basePage.setSelectedCurrency(envSecondExchange)
-//                .setFirstExchange(envHomeCountryOrCurrency)
-//                .setSecondExchange(envFirstExchange)
-//                .setThirdExchange(envThirdExchange);
-//
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//    @Test(dataProvider="getData")
-//    public void comb4(int p1, String p2, String p3) {
-//        launch(p1, p2, p3);
-//
-//        basePage.setSelectedCurrency(envThirdExchange)
-//                .setFirstExchange(envHomeCountryOrCurrency)
-//                .setSecondExchange(envSecondExchange)
-//                .setThirdExchange(envFirstExchange);
-//
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+    @Test(dataProvider="getData")
+    public void comb3(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envSecondExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envFirstExchange)
+                .setThirdExchange(envThirdExchange);
+
+        Assert.assertEquals(basePage.getSelectedAmount(envSecondExchange), 100.0, "Your currency is not 100 - check amount");
+        Assert.assertTrue(basePage.getRowList1Amount(envHomeCountryOrCurrency) > 400, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList2Amount(envFirstExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList3Amount(envThirdExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
+
+
+
+    }
+
+    @Test(dataProvider="getData")
+    public void comb4(int p1, String p2, String p3) {
+        launch(p1, p2, p3);
+
+        basePage.setSelectedCurrency(envThirdExchange)
+                .setFirstExchange(envHomeCountryOrCurrency)
+                .setSecondExchange(envSecondExchange)
+                .setThirdExchange(envFirstExchange);
+
+        Assert.assertEquals(basePage.getSelectedAmount(envThirdExchange), 100.0, "Your currency is not 100 - check amount");
+        Assert.assertTrue(basePage.getRowList1Amount(envHomeCountryOrCurrency) > 400, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList2Amount(envSecondExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList3Amount(envFirstExchange) > 110, "Exchange rate definitely too high - something is going wrong in your country!");
+
+
+
+    }
 
 
 

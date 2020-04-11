@@ -44,7 +44,8 @@ public class BasePage extends Page {
     @AndroidFindBy(id = "tiny.exchangerate:id/symbol")
     private List<WebElement> secondCurrency;
 
-
+    @AndroidFindBy(id = "tiny.exchangerate:id/result")
+    private List<WebElement> rowList3Amount;
 
 
 //    @AndroidFindBy(id = "tiny.exchangerate:id/selectedSymbol")
@@ -84,58 +85,6 @@ public class BasePage extends Page {
         return this;
     }
 
-
-    @AndroidFindBy(id = "tiny.exchangerate:id/result")
-    private List<WebElement> rowList3Amount;
-
-    public void getSelectedAmount(){
-
-        System.out.println("Selected result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(0).getText() + "<<<<<<<<<<<<<<<<<<<<");
-
-
-    }
-
-    public void getRowList1Amount(){
-
-        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(1).getText() + "<<<<<<<<<<<<<<<<<<<<");
-
-
-    }
-
-    public void getRowList2Amount(){
-
-        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(2).getText() + "<<<<<<<<<<<<<<<<<<<<");
-
-
-    }
-
-
-
-
-    public void getRowList3Amount(){
-
-        System.out.println("RowList3Amount result: >>>>>>>>>>>>>>>>>>>>>>>>>>" + this.rowList3Amount.get(3).getText() + "<<<<<<<<<<<<<<<<<<<<");
-        String number = "123,321";
-        System.out.println("RowList3Amount result: >>>>>>>double>>>>>>>>>>>>>>>>>>>" + Double.parseDouble( this.rowList3Amount.get(3).getText().replace(",",".") ) + "<<<<<<<<<<<<<<<<<<<<");
-
-    }
-
-
-//    <android.widget.FrameLayout resource-id="tiny.exchangerate:id/selectedRowView">
-//<android.widget.LinearLayout resource-id="tiny.exchangerate:id/container">
-//<android.view.ViewGroup>
-//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
-
-    ///////////////////////////////
-
-//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
-//
-//    <androidx.recyclerview.widget.RecyclerView resource-id="tiny.exchangerate:id/rowList">
-//<android.view.ViewGroup>
-//<android.widget.LinearLayout resource-id="tiny.exchangerate:id/flagContainer">
-//<android.widget.TextView resource-id="tiny.exchangerate:id/result">
-
-
     public BasePage setThirdExchange(String countryOrCurrency){
         clickElement(this.secondCurrency.get(2));
         clickElement(this.searchButton);
@@ -144,6 +93,42 @@ public class BasePage extends Page {
         clickElement(this.fistFlagTextView);
         return this;
     }
+
+
+
+
+    public double getSelectedAmount(String currency){
+
+        System.out.println("Have " + this.rowList3Amount.get(0).getText() + " [country/currency = " + currency + " ]");
+        return Double.parseDouble( this.rowList3Amount.get(0).getText().replace(",",".") );
+
+    }
+
+    public double getRowList1Amount(String currency){
+
+        System.out.println("Could buy " + this.rowList3Amount.get(1).getText() + " [country/currency = " + currency + " ]");
+        return Double.parseDouble( this.rowList3Amount.get(1).getText().replace(",",".") );
+
+    }
+
+    public double getRowList2Amount(String currency){
+
+        System.out.println("Could buy " + this.rowList3Amount.get(2).getText() + " [country/currency = " + currency + " ]");
+        return Double.parseDouble( this.rowList3Amount.get(2).getText().replace(",",".") );
+
+    }
+
+
+    public double getRowList3Amount(String currency){
+
+        System.out.println("Could buy " + this.rowList3Amount.get(3).getText() + " [country/currency = " + currency + " ]");
+        return Double.parseDouble( this.rowList3Amount.get(3).getText().replace(",",".") );
+
+    }
+
+
+
+
 
 
 
