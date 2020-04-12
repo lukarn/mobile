@@ -154,7 +154,7 @@ public class TestMainTasks
         Assert.assertEquals(basePage.getSelectedAmount(envThirdExchange), 100.0, "Your currency is not 100 - check amount");
         Assert.assertTrue(basePage.getRowList1Amount(envHomeCountryOrCurrency) > 400, "Exchange rate definitely too high - something is going wrong in your country!");
         Assert.assertTrue(basePage.getRowList2Amount(envSecondExchange) > 80, "Exchange rate definitely too high - something is going wrong in your country!");
-        Assert.assertTrue(basePage.getRowList3Amount(envFirstExchange) > 110, "Exchange rate definitely too high - something is going wrong in your country!");
+        Assert.assertTrue(basePage.getRowList3Amount(envFirstExchange) > 100, "Exchange rate definitely too high - something is going wrong in your country!");
 
 
 
